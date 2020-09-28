@@ -1,0 +1,12 @@
+module.exports = (client, message, args) => {
+
+if (message.deletable) message.delete();
+  
+  var arg= message.cleanContent.split(" ").slice(1).join(" ")
+
+  if(!arg){
+   message.channel.send('What do you want me to say?')
+} else
+message.channel.send (arg)
+		
+	}
