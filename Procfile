@@ -1,1 +1,1 @@
-web: npm install server && node app/bot.js
+web: npm install server && node bot.js
