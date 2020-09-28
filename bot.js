@@ -9,30 +9,6 @@ const { prefix, token } = require('./config.json');
 const client = new Discord.Client();
 
 
-client.on("message", message => {
-
-// Variable que permitirÃÂ¡ recibir mensajes al "dm"
-  if (message.channel.type === "dm") {
-
-//Embed personalizado que se enviarÃÂ
-  message.client.channels.cache.get("757164659882328074").send({embed: {
-      color: 3447003,   
-      author: {
-          name: message.client.user.username,
-          icon_url: message.client.user.avatarURL()
-      },
-      title: "Mensaje Directo",
-      description: `Mensaje enviado por <@${message.author.id}>`,
-      fields: [{
-          name: "Mensaje:",
-          value: message.content
-        }
-      ],
-      timestamp: new Date(),
-      
-    }}
-)}
-});
 
 
 fs.readdir("./events/", (err, files) => {
@@ -45,15 +21,15 @@ fs.readdir("./events/", (err, files) => {
 });
 
 
-client.noprefixcommands = new Discord.Collection();
+client.commands = new Discord.Collection();
 
-fs.readdir("./noprefixcommands/", (err, files) => {
+fs.readdir("./commands/", (err, files) => {
   if (err) return console.error(err);
   files.forEach(file => {
     if (!file.endsWith(".js")) return;
-    let props = require(`./noprefixcommands/${file}`);
-    let noprefixcommandName = file.split(".")[0];
-    client.noprefixcommands.set(noprefixcommandName, props);
+    let props = require(`./commands/${file}`);
+    let commands = file.split(".")[0];
+    client.command.set(commandName, props);
   });
 });
 
