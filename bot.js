@@ -21,17 +21,15 @@ fs.readdir("./events/", (err, files) => {
 });
 
  
-client.commands = new Discord.Collection();
+client.command = new Discord.Collection();
 
-fs.readdir("./commands/", (err, files) => {
-  if (err) return console.error(err);
-  files.forEach(file => {
-    if (!file.endsWith(".js")) return;
-    let props = require(`./commands/${file}`);
-    let commands = file.split(".")[0];
-    client.commands.set(commandName, props);
-  });
-});
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	// set a new item in the Collection
+	// with the key as the command name and the value as the exported module
+	client.command.set(command.name, command);
+  }
 
 
 
