@@ -20,6 +20,8 @@ fs.readdir("./events/", (err, files) => {
   });
 });
 
+ 
+client.commands = new Discord.Collection();
 
 fs.readdir("./commands/", (err, files) => {
   if (err) return console.error(err);
@@ -27,6 +29,7 @@ fs.readdir("./commands/", (err, files) => {
     if (!file.endsWith(".js")) return;
     let props = require(`./commands/${file}`);
     let commands = file.split(".")[0];
+    client.commands.set(commandName, props);
   });
 });
 
