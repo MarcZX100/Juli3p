@@ -1,3 +1,3 @@
 exports.run = (client, message, args) => {
-message.channel.send('Holaa ${message.author.tag}')
+message.channel.send(`Holaa ${message.author.displayName}`)
 }
